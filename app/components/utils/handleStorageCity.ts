@@ -4,7 +4,7 @@ import { handleStorageCityProps } from "./types";
 
 const KEY = "userRunningCity";
 
-export const handleStorageCity = ({userCity, handleAddedCities, handleSetErrors, handleClearInput}: handleStorageCityProps) => {
+export const handleStorageCity = ({userCity, handleAddCities, handleSetErrors, handleClearInput}: handleStorageCityProps) => {
     let added: string[] = [];
     const stored = getStorageData(KEY) || [];
 
@@ -17,7 +17,7 @@ export const handleStorageCity = ({userCity, handleAddedCities, handleSetErrors,
           handleClearInput();
         } else {
           if (stored && stored.includes(userCity)) {
-            handleSetErrors("tou're already running in this city!!");
+            handleSetErrors("you're already running in this city!!");
             return;
           }
 
@@ -32,5 +32,5 @@ export const handleStorageCity = ({userCity, handleAddedCities, handleSetErrors,
       }
       else handleSetErrors("type userCity your city");
 
-    handleAddedCities(added);
+      handleAddCities(added);
   };

@@ -7,7 +7,7 @@ import { handleStorageCity } from "../utils/handleStorageCity";
 
 import { AddCityProps } from "./types";
 
-const AddCity = ({ handleAddedCities }: AddCityProps) => {
+const AddCity = ({ handleAddCities }: AddCityProps) => {
   const [userCity, setUserCity] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { city, handleCityName } = useFetchLocation();
@@ -42,7 +42,7 @@ const AddCity = ({ handleAddedCities }: AddCityProps) => {
             onClick={() =>
               handleStorageCity({
                 userCity,
-                handleAddedCities,
+                handleAddCities,
                 handleSetErrors,
                 handleClearInput,
               })

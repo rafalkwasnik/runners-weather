@@ -13,7 +13,7 @@ const Cities = () => {
   const [cities, setCities] = useState(defaultCities);
   const [addedCities, setAddedCities] = useState<string[]>();
 
-  const handleAddedCities = (added: string[]) => {
+  const handleAddCities = (added: string[]) => {
     setAddedCities(added);
   };
 
@@ -32,7 +32,7 @@ const Cities = () => {
   return (
     <>
       <CitiesList cities={cities} />
-      <AddCity handleAddedCities={handleAddedCities} />
+      <AddCity handleAddCities={handleAddCities} />
     </>
   );
 };

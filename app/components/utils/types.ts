@@ -1,6 +1,6 @@
 export type handleStorageCityProps = {
     userCity: string
-    handleAddedCities: (val: string[]) => void
+    handleAddCities: (val: string[]) => void
     handleSetErrors: (val: string) => void
     handleClearInput: () => void
 }

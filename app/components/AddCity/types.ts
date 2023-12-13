@@ -1,3 +1,3 @@
 export type AddCityProps = {
-    handleAddedCities: (added: string[]) => void;
+    handleAddCities: (added: string[]) => void;
 };

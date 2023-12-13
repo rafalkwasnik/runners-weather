@@ -1,38 +1,30 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 
-import { useWeatherQuery } from "../../hooks/useWeatherQuery";
+import { fetchWeather } from "../../api/fetchWeather";
 
 import { CurrentWeatherProps } from "./types";
 
-const Weather = ({ city }: CurrentWeatherProps) => {
-  const { data, error, isLoading } = useWeatherQuery(city);
+const Weather = async ({ city }: CurrentWeatherProps) => {
+  const weather = await fetchWeather(city);
 
-  if (error) <h2> {error.message} </h2>;
-
-  if (isLoading) {
-    return <h2>Loading...</h2>;
-  }
-  if (data)
-    return (
-      <>
-        <ul className="mb-8">
-          <li className="mb-2">
-            <Image
-              src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
-              width={64}
-              height={64}
-              alt="weather condition"
-            />
-          </li>
-          <li>status: {data.weather[0].description}</li>
-          <li>temperature: {Math.round(data.main.temp)} C</li>
-          <li>humidity: {data.main.humidity} %</li>
-        </ul>
-      </>
-    );
+  return (
+    <>
+      <ul className="mb-8">
+        <li className="mb-2">
+          <Image
+            src={`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`}
+            width={64}
+            height={64}
+            alt="weather condition"
+          />
+        </li>
+        <li>status: {weather.weather[0].description}</li>
+        <li>temperature: {Math.round(weather.main.temp)} C</li>
+        <li>humidity: {weather.main.humidity} %</li>
+      </ul>
+    </>
+  );
 };
 
 export default Weather;
