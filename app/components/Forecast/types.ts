@@ -1,7 +1,4 @@
-import { ResponseForecastType } from "@/app/types/types";
-
 export type ForecastProps = {
-    forecast: ResponseForecastType;
     city: string;
 };
   

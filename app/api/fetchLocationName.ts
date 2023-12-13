@@ -4,10 +4,6 @@ export const fetchLocationName = async (latitude: number, longitude: number): Pr
   try {
     const data = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude},${longitude}&key=${APIkey}`);
 
-    if (!data.ok) {
-      throw new Error(`HTTP error! Status: ${data.status}`);
-    }
-
     const location = await data.json();
     const name = location.results[0].components.city;
 

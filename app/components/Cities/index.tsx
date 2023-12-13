@@ -10,24 +10,24 @@ import AddCity from "../AddCity";
 import { getStorageData } from "./utils";
 
 const Cities = () => {
-  const [cities, setCities] = useState<string[]>(defaultCities);
-  const [addedCity, setAddedCity] = useState<string[]>();
+  const [cities, setCities] = useState(defaultCities);
+  const [addedCities, setAddedCities] = useState<string[]>();
 
   const handleAddedCities = (added: string[]) => {
-    setAddedCity(added);
+    setAddedCities(added);
   };
 
   useEffect(() => {
-    const userCity = getStorageData("userRunningCity") || [];
+    const userCities = getStorageData("userRunningCity") || [];
 
-    if (userCity) setCities([...defaultCities, ...userCity]);
+    if (userCities) setCities([...defaultCities, ...userCities]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (addedCity) setCities([...cities, ...addedCity]);
+    if (addedCities) setCities([...cities, ...addedCities]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addedCity]);
+  }, [addedCities]);
 
   return (
     <>

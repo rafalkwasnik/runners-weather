@@ -3,22 +3,15 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { useQuery } from "@tanstack/react-query";
-import { fetchForecast } from "@/app/api/fetchForecast";
-
 import { DayWeatherType, ForecastProps } from "./types";
 import { ForecastType } from "@/app/types";
 
-const Forecast = ({ forecast, city }: ForecastProps) => {
+import useForecastQuery from "@/app/hooks/useForecastQuery";
+
+const Forecast = ({ city }: ForecastProps) => {
   const [weather, setWeather] = useState<DayWeatherType[]>();
 
-  const { data, error } = useQuery({
-    queryKey: ["forecast"],
-    queryFn: () => fetchForecast(city),
-    initialData: forecast,
-  });
-
-  if (error) <h2> error.message </h2>;
+  const { data, error, isLoading } = useForecastQuery(city);
 
   const getWeatherForAllDays = (data: ForecastType[]) => {
     const entriesFor12PM = data.filter((entry) =>
@@ -42,10 +35,16 @@ const Forecast = ({ forecast, city }: ForecastProps) => {
   };
 
   useEffect(() => {
-    const weather = getWeatherForAllDays(data.days);
-    setWeather(weather);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (data) {
+      setWeather(getWeatherForAllDays(data.days));
+    }
+  }, [data]);
+
+  if (error) <h2> {error.message} </h2>;
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <>
