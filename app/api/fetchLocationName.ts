@@ -1,18 +1,4 @@
-type coordsType = {
-  latitude: number;
-  longitude: number;
-};
-
 const APIkey = "dd5d51f75d5c46e7a804294e06bcaa98";
-
-// export const fetchLocationName = async (coordinates: coordsType) => {
-//   const url = `https://api.opencagedata.com/geocode/v1/json?q=${coordinates.latitude},${coordinates.longitude}&key=${APIkey}`;
-//   const res = await fetch(url);
-//   const location = await res.json();
-//   const name = location.results[0].components.city;
-
-//   return name;
-// };
 
 export const fetchLocationName = async (latitude: number, longitude: number): Promise<string> => {
   try {

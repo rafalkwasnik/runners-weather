@@ -11,6 +11,7 @@ import { ForecastType } from "@/app/types";
 
 const Forecast = ({ forecast, city }: ForecastProps) => {
   const [weather, setWeather] = useState<DayWeatherType[]>();
+
   const { data, error } = useQuery({
     queryKey: ["forecast"],
     queryFn: () => fetchForecast(city),
