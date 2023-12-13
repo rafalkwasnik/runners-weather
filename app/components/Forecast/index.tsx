@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import getWeatherEachDay from "../utils/getWeatherEachDay";
-
+import { getWeatherEachDay } from "../utils/getWeatherEachDay";
 import { fetchForecast } from "../../api/fetchForecast";
 import { ForecastProps } from "./types";
 

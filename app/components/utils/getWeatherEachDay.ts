@@ -1,6 +1,6 @@
 import { ForecastType } from "@/app/api/types";
 
- const getWeatherEachDay = (data: ForecastType[]) => {
+ export const getWeatherEachDay = (data: ForecastType[]) => {
     const entriesFor12PM = data.filter((entry) =>
       entry.dt_txt.endsWith("12:00:00")
     );
@@ -21,5 +21,3 @@ import { ForecastType } from "@/app/api/types";
 
     return temperaturesForEachDay;
 };
-
-export default getWeatherEachDay
