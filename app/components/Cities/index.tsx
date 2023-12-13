@@ -7,7 +7,7 @@ import { defaultCities } from "./const";
 import CitiesList from "../CitiesList";
 import AddCity from "../AddCity";
 
-import { getStorageData } from "./utils";
+import { getStorageData } from "../utils/getStorageData";
 
 const Cities = () => {
   const [cities, setCities] = useState(defaultCities);

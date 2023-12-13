@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import useCopyToClipboard from "@/app/hooks/useCopyToClipboard";
+import { useCopyToClipboard } from "../../hooks/useCopyToClipboard";
 
 const CopyUrl = () => {
   const [copyToClipboard] = useCopyToClipboard();

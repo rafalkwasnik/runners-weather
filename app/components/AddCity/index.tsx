@@ -2,44 +2,26 @@
 
 import React, { useEffect, useState } from "react";
 
-import { defaultCities } from "../Cities/const";
-import { getStorageData } from "../Cities/utils";
-import { useGetLocation } from "../../hooks/useGetLocation";
+import { useFetchLocation } from "../../hooks/useFetchLocation";
+import { handleStorageCity } from "../utils/handleStorageCity";
+
 import { AddCityProps } from "./types";
 
 const AddCity = ({ handleAddedCities }: AddCityProps) => {
-  const [userCityName, setUserCityName] = useState("");
+  const [userCity, setUserCity] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { city, handleCityName } = useGetLocation();
+  const { city, handleCityName } = useFetchLocation();
 
-  const handleStorageCity = (key: string) => {
-    let added: string[] = [];
-    const stored = getStorageData(key) || [];
+  const handleSetErrors = (message: string) => {
+    setErrorMessage(message);
+  };
 
-    if (userCityName != "")
-      if (!defaultCities.includes(userCityName)) {
-        if (stored && !stored.length) {
-          localStorage.setItem(key, JSON.stringify([userCityName]));
-          added = [userCityName];
-        } else {
-          if (stored && stored.includes(userCityName)) {
-            setErrorMessage("tou're already running in this city!!");
-            return;
-          }
-
-          localStorage.setItem(key, JSON.stringify([...stored, userCityName]));
-          added = [userCityName];
-        }
-      } else {
-        setErrorMessage("you're already running in this city");
-      }
-    else setErrorMessage("type name your city");
-
-    handleAddedCities(added);
+  const handleClearInput = () => {
+    setUserCity("");
   };
 
   useEffect(() => {
-    setUserCityName(city);
+    setUserCity(city);
   }, [city]);
 
   return (
@@ -52,12 +34,19 @@ const AddCity = ({ handleAddedCities }: AddCityProps) => {
             type="text"
             name="addCity"
             placeholder="type city name"
-            value={userCityName}
-            onChange={(e) => setUserCityName(e.target.value)}
+            value={userCity}
+            onChange={(e) => setUserCity(e.target.value)}
             className="p-2 text-sm text-gray-700 border-0 w-100 md:w-1/5"
           />
           <button
-            onClick={() => handleStorageCity("userRunningCity")}
+            onClick={() =>
+              handleStorageCity({
+                userCity,
+                handleAddedCities,
+                handleSetErrors,
+                handleClearInput,
+              })
+            }
             className="bg-orange-600 hover:bg-blue-950 text-white-0 pt-2 pb-2 pl-6 pr-6"
           >
             Add

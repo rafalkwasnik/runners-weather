@@ -3,8 +3,9 @@
 import React from "react";
 import Image from "next/image";
 
+import { useWeatherQuery } from "../../hooks/useWeatherQuery";
+
 import { CurrentWeatherProps } from "./types";
-import useWeatherQuery from "@/app/hooks/useWeatherQuery";
 
 const Weather = ({ city }: CurrentWeatherProps) => {
   const { data, error, isLoading } = useWeatherQuery(city);
@@ -28,7 +29,7 @@ const Weather = ({ city }: CurrentWeatherProps) => {
           </li>
           <li>status: {data.weather[0].description}</li>
           <li>temperature: {Math.round(data.main.temp)} C</li>
-          <li>humidity: {data.main.humidity}</li>
+          <li>humidity: {data.main.humidity} %</li>
         </ul>
       </>
     );

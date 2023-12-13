@@ -1,4 +1,4 @@
-import { ResponseForecastType } from "../types";
+import { ResponseForecastType } from "./types";
 
 const APIkey = "438bf8d86411f569e45e432c2fdb2fb7";
 

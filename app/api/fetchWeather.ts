@@ -1,4 +1,4 @@
-import { ResponseWeatherType } from "../types";
+import { ResponseWeatherType } from "./types";
 
 const APIkey = "438bf8d86411f569e45e432c2fdb2fb7"; 
 

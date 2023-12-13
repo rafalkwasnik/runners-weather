@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { fetchLocationName } from "../api/fetchLocationName";
 
-export const useGetLocation = () => {
+export const useFetchLocation = () => {
   const [city, setCity] = useState<string>('')
 
   const handleCityName = () => {

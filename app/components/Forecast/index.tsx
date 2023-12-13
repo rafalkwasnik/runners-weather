@@ -3,40 +3,18 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { DayWeatherType, ForecastProps } from "./types";
-import { ForecastType } from "@/app/types";
+import getWeatherEachDay from "../utils/getWeatherEachDay";
+import { useForecastQuery } from "../../hooks/useForecastQuery";
 
-import useForecastQuery from "@/app/hooks/useForecastQuery";
+import { DayWeatherType, ForecastProps } from "./types";
 
 const Forecast = ({ city }: ForecastProps) => {
   const [weather, setWeather] = useState<DayWeatherType[]>();
-
   const { data, error, isLoading } = useForecastQuery(city);
-
-  const getWeatherForAllDays = (data: ForecastType[]) => {
-    const entriesFor12PM = data.filter((entry) =>
-      entry.dt_txt.endsWith("12:00:00")
-    );
-
-    const temperaturesForEachDay = entriesFor12PM.map((entry) => {
-      const options = { day: "numeric", month: "long" } as const;
-      const dateTime = new Date(entry.dt * 1000);
-      const formattedDate = dateTime.toLocaleDateString("en-GB", options);
-
-      return {
-        date: formattedDate,
-        temp: Math.round(entry.main.temp),
-        humidity: entry.main.humidity,
-        icon: entry.weather[0].icon,
-      };
-    });
-
-    return temperaturesForEachDay;
-  };
 
   useEffect(() => {
     if (data) {
-      setWeather(getWeatherForAllDays(data.days));
+      setWeather(getWeatherEachDay(data.days));
     }
   }, [data]);
 
@@ -49,7 +27,7 @@ const Forecast = ({ city }: ForecastProps) => {
   return (
     <>
       <h2 className="text-md mb-4">next five days...</h2>
-      <div className="flex flex-col md:flex-row justify-between max-w-3xl">
+      <div className="flex flex-col md:flex-row justify-between max-w-5xl">
         {weather &&
           weather.map((day) => (
             <div key={day.humidity} className="flex flex-col">
@@ -63,7 +41,8 @@ const Forecast = ({ city }: ForecastProps) => {
                 />
               </span>
               <span className="text-sm">temp: {day.temp} C</span>
-              <span className="text-sm">humidity: {day.humidity}</span>
+              <span className="text-sm">humidity: {day.humidity} %</span>
+              <span className="text-sm">wind: {day.wind.speed} meter/sec</span>
             </div>
           ))}
       </div>

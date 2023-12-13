@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useCopyToClipboard = () => {
+export const useCopyToClipboard = () => {
     const [result, setResult] = useState<
       null | { state: 'success' } | { state: 'error'; message: string }
     >(null);
@@ -21,5 +21,3 @@ const useCopyToClipboard = () => {
   
     return [copy, result] as const;
   }
-
-  export default useCopyToClipboard

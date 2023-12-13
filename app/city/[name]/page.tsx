@@ -1,9 +1,9 @@
 import React from "react";
 
-import Weather from "@/app/components/Weather";
-import Forecast from "@/app/components/Forecast";
-import PreviousPage from "@/app/components/PreviousPage";
-import CopyUrl from "@/app/components/CopyUrl";
+import Weather from "../../components/Weather";
+import Forecast from "../../components/Forecast";
+import PreviousPage from "../../components/PreviousPage";
+import CopyUrl from "../../components/CopyUrl";
 
 import { CityPageProps } from "./types";
 
