@@ -3,8 +3,11 @@ import { fetchLocationName } from "../api/fetchLocationName";
 
 export const useFetchLocation = () => {
   const [city, setCity] = useState<string>('')
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState('');
 
   const handleCityName = () => {
+    setIsLoading(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async position => {
@@ -12,15 +15,16 @@ export const useFetchLocation = () => {
           const nearestCity = await fetchLocationName(latitude, longitude)
 
           setCity(nearestCity)
+          setIsLoading(false)
         },
         error => {
-          console.error(error.message);
+          setIsError(error.message.toLocaleLowerCase());
         }
       );
     } else {
-      console.error("Location not supported");
+      setIsError("location not supported");
     }
   }
 
-  return { city, handleCityName }
+  return { city, isLoading, isError, handleCityName }
 };

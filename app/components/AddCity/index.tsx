@@ -10,7 +10,7 @@ import { AddCityProps } from "./types";
 const AddCity = ({ handleAddCities }: AddCityProps) => {
   const [userCity, setUserCity] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { city, handleCityName } = useFetchLocation();
+  const { city, isLoading, isError, handleCityName } = useFetchLocation();
 
   const handleSetErrors = (message: string) => {
     setErrorMessage(message);
@@ -60,7 +60,11 @@ const AddCity = ({ handleAddCities }: AddCityProps) => {
           onClick={() => handleCityName()}
           className="bg-gray-300 hover:bg-black hover:text-gray-300 text-black text-xs mt-8 pt-2 pb-2 pl-6 pr-6 w-full md:w-1/5"
         >
-          get from your localisation
+          {isError
+            ? isError
+            : isLoading
+            ? "loading..."
+            : "get from your localisation"}
         </button>
       </div>
     </div>
