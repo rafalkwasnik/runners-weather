@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Marathon - Weather Channel",
+  title: "Runners - Weather App",
 };
 
 export default function RootLayout({

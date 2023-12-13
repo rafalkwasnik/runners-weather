@@ -36,7 +36,7 @@ const AddCity = ({ handleAddCities }: AddCityProps) => {
             placeholder="type city name"
             value={userCity}
             onChange={(e) => setUserCity(e.target.value)}
-            className="p-2 text-sm text-gray-700 border-0 w-100 md:w-1/5"
+            className="p-2 text-sm text-gray-700 border-0 w-full md:w-1/5"
           />
           <button
             onClick={() =>
@@ -58,7 +58,7 @@ const AddCity = ({ handleAddCities }: AddCityProps) => {
 
         <button
           onClick={() => handleCityName()}
-          className="bg-gray-300 hover:bg-black hover:text-gray-300 text-black text-xs mt-8 pt-2 pb-2 pl-6 pr-6 w-1/1 md:w-1/5"
+          className="bg-gray-300 hover:bg-black hover:text-gray-300 text-black text-xs mt-8 pt-2 pb-2 pl-6 pr-6 w-full md:w-1/5"
         >
           get from your localisation
         </button>
