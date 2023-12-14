@@ -8,7 +8,8 @@ import CopyUrl from "../../components/CopyUrl";
 import { CityPageProps } from "./types";
 
 const CityPage = async (searchParams: CityPageProps) => {
-  const city = searchParams.params.name;
+  const pathName = searchParams.params.name;
+  const city = decodeURIComponent(pathName);
 
   return (
     <>
